@@ -28,11 +28,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Route::resource('posts', PostController::class);
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
-Route::get('posts', [PostController::class, 'index']);
+
 Route::get('posts/search/{title}', [PostController::class, 'search']);
 
 //Private router
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('posts', [PostController::class, 'index']);
     Route::post('posts', [PostController::class, 'store']);
     Route::get('posts/{id}', [PostController::class, 'show']);
     Route::put('posts/{id}', [PostController::class, 'update']);
